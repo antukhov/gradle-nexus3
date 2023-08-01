@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.1.1'
+    id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.antukhov'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    // Check if the NEXUS_URL EV is set
+    def nexusUrlEv = System.getenv("NEXUS_URL")
+    // Check if the NEXUS_URL ARG is set
+    def nexusUrlArg = project.findProperty('NEXUS_URL')
+    // define var if the NEXUS_URL EV or ARG is set
+    def nexusUrl = nexusUrlEv ?: nexusUrlArg ?: ''
+    if (nexusUrl != null && !nexusUrl.isBlank()) {
+        def uri = "${nexusUrl}/repository/maven-public/"
+        System.println("Using Nexus Repository: ${uri}")
+        maven {
+            url "${uri}"
+            allowInsecureProtocol = true
+        }
+    } else {
+        System.println("No Nexus URL specified for dependencies, using Maven Central")
+        mavenCentral()
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

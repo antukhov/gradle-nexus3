@@ -1,0 +1,9 @@
+## https://www.jetbrains.com/help/idea/2023.2/http-client-in-product-code-editor.html
+
+### Get chunked sample data (host)
+
+GET http://localhost:8090/my-endpoint/param/myparam
+
+### Get chunked sample data (dockerized)
+
+GET http://localhost:8080/my-endpoint/param/myparam

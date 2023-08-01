@@ -1,0 +1,14 @@
+version: '3.8'
+
+# docker-compose -f docker-compose.yaml up
+
+services:
+  # My App
+  my_app_w_nexus3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NEXUS_URL=http://host.docker.internal:8081
+    ports:
+      - "8080:8090"

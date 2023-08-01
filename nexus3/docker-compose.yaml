@@ -1,0 +1,15 @@
+version: '3.8'
+
+# docker-compose up
+
+services:
+  nexus_lms:
+    build:
+      context: nexus3
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    restart: unless-stopped
+    volumes:
+      - ~/nexus3-data:/nexus-data
+    privileged: true

@@ -1,0 +1,25 @@
+pluginManagement {
+    repositories {
+        // Check if the NEXUS_HOST EV is set
+        def nexusUrlEv = System.getenv("NEXUS_URL")
+        // Check if the NEXUS_HOST ARG is set
+        def nexusUrlArg = System.getProperty('NEXUS_URL')
+        // define var if the NEXUS_URL EV or ARG is set
+        def nexusUrl = nexusUrlEv ?: nexusUrlArg ?: ''
+        if (nexusUrl != null && !nexusUrl.isBlank()) {
+            // If NEXUS_URL is defined, configure Nexus Repository as a plugin repository
+            def uri = "${nexusUrl}/repository/maven-public/"
+            System.println("Using Nexus Repository for plugins: ${uri}")
+            maven {
+                url "${uri}"
+                allowInsecureProtocol = true
+            }
+        } else {
+            // If NEXUS_URL is not defined or empty, only use the default Gradle Plugin Portal
+            System.println("NO Nexus URL specified for plugins, using Gradle Plugin Portal")
+            gradlePluginPortal()
+        }
+    }
+}
+
+rootProject.name = 'myapp'
