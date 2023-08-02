@@ -7,7 +7,7 @@ Purpose of it is to show how to configure Nexus 3 as Gradle dependency repositor
 ## Article
 
 [Nexus 3 OSS as a Maven and Gradle repository to win time or "How dev nomads work offline"
-](https://dev.to/lechatquidanse/nexus-3-oss-as-a-maven-and-gradle-repository-to-win-time-or-how-dev-nomads-work-offline-1j0m)
+](https://medium.com/@antukhov/nexus-3-oss-as-a-maven-and-gradle-repository-to-win-time-or-how-dev-nomads-work-offline-8d775669cb23)
 
 ## Setup Nexus 3
 > this step is optional, you can skip it if you don't want to use Nexus 3
